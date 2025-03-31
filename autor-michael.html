@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Carrillo - Los Pioneros Del Conocimiento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        header img {
+            height: 50px;
+            margin-right: 15px;
+            border: 2px solid white;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        .titulo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .titulo-container div.titulo {
+            border: 3px solid #FFD700;
+            padding: 15px;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-shadow: 2px 2px 4px #000;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .titulo-container div.titulo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        .lema {
+            font-size: 16px;
+            text-align: right;
+            margin-top: 5px;
+            font-style: italic;
+            color: #FFD700;
+        }
+        .fecha-hora {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFD700;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .volver-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #FFD700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .volver-btn:hover {
+            background-color: #FFC107;
+            transform: scale(1.05);
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .perfil-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        .perfil-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .perfil-foto {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            border: 5px solid #FFD700;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin-right: 30px;
+        }
+        .perfil-foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .perfil-info {
+            text-align: left;
+            flex-grow: 1;
+        }
+        .perfil-nombre {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            border-bottom: 3px solid #FFD700;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        .perfil-rol {
+            font-size: 20px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .perfil-datos {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .perfil-dato {
+            background-color: #f5f5f5;
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin: 5px 10px 5px 0;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .perfil-dato i {
+            margin-right: 5px;
+            color: #FFD700;
+        }
+        .seccion {
+            text-align: left;
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .seccion h2 {
+            color: #333;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .seccion p {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .proyecto-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .proyecto-card:hover {
+            transform: translateY(-5px);
+        }
+        .proyecto-titulo {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .proyecto-descripcion {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .proyecto-tecnologias {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .tecnologia-tag {
+            background-color: #FFD700;
+            color: #333;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin: 0 5px 5px 0;
+        }
+        .habilidades-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .habilidad-grupo {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+        .habilidad-titulo {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .habilidad-barra {
+            background-color: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .habilidad-progreso {
+            position: absolute;
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+        }
+        .habilidad-nombre {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .publicaciones-lista {
+            list-style-type: none;
+            padding: 0;
+        }
+        .publicacion-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        .publicacion-item:hover {
+            background-color: #f9f9f9;
+        }
+        .publicacion-titulo {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .publicacion-fecha {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        .publicacion-resumen {
+            font-size: 14px;
+            color: #666;
+        }
+        .publicacion-enlace {
+            display: inline-block;
+            margin-top: 10px;
+            color: #FFA500;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .publicacion-enlace:hover {
+            text-decoration: underline;
+        }
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .contacto-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .contacto-icono {
+            width: 50px;
+            height: 50px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .contacto-icono img {
+            width: 25px;
+            height: 25px;
+        }
+        .contacto-texto {
+            font-size: 14px;
+            color: #555;
+        }
+        .contacto-texto a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contacto-texto a:hover {
+            color: #FFD700;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 10px;
+            width: 100%;
+            height: auto;
+        }
+        .copyright {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #999;
+            border-top: 1px solid #666;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="fechaHora" class="fecha-hora">Cargando fecha y hora...</div>
+        <a href="C:\Users\USUARIO\Desktop\OSQUITAR 2025\ESPAÑOL\ESPAÑOL.html    " class="volver-btn">Volver al Inicio</a>
+        <a href="index.html">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlAZEiFdKbti3BQI5AYfYojcDlg0gTS1aWveFXdqI0lHAuadh5Rau13O19NaIBSVkjgnKEqcTxQVdl_sVcwLkit2hH3NI_-XrE4ipbOz6AYoWIN053nyo7EpCOkU5lTlpAHJFhaCbN7nQNt9olcBagNJPlnOwnF3OZ9ODB3RcORQA4K8SOiUp7AHf_-1wa/s200/Logo.png" alt="Logo">
+        </a>
+        <div class="titulo-container">
+            <div class="titulo">Los Pioneros Del Conocimiento</div>
+            <div class="lema">"Explorando el conocimiento"</div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="perfil-container">
+            <div class="perfil-header">
+                <div class="perfil-foto">
+                    <img src="/api/placeholder/200/200" alt="Foto de Michael Alvarez">
+                </div>
+                <div class="perfil-info">
+                    <h1 class="perfil-nombre">Michael Alvarez</h1>
+                    <div class="perfil-rol">Secretario</div>
+                    <div class="perfil-datos">
+                        <div class="perfil-dato"><i>📍</i> Bogotá, Colombia</div>
+                        <div class="perfil-dato"><i>🎓</i>  </div>
+                        <div class="perfil-dato"><i>💻</i>  </div>
+                        <div class="perfil-dato"><i>🌐</i>  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="seccion">
+            <h2>Biografía</h2>
+            <p></p>
+            
+            <p></p>
+            
+            <p></p>
+            
+           
+        </div>
+        
+        <div class="seccion">
+            <h2>Proyectos Destacados</h2>
+            <div class="proyectos-grid">
+                <div class="proyecto-card">
+                    <div class="proyecto-titulo">   </div>
+                    <div class="proyecto-descripcion"></div>
+                    <div class="proyecto-tecnologias">
+                        <span class="tecnologia-tag"> </span>
+                        <span class="tecnologia-tag"> </span>
+                        <span class="tecnologia-tag"> </span>
+                        <span class="tecnologia-tag"> </span>
+                    </div>
+                </div>
+                
+                <div class="proyecto-card">
+                    <div class="proyecto-titulo">API de Recomendación de Contenido</div>
+                    <div class="proyecto-descripcion">Sistema de recomendación basado en machine learning que sugiere contenidos relevantes a los usuarios según sus preferencias e historial de navegación.</div>
+                    <div class="proyecto-tecnologias">
+                        <span class="tecnologia-tag">Python</span>
+                        <span class="tecnologia-tag">TensorFlow</span>
+                        <span class="tecnologia-tag">FastAPI</span>
+                        <span class="tecnologia-tag">Docker</span>
+                    </div>
+                </div>
+                
+                <div class="proyecto-card">
+                    <div class="proyecto-titulo">Herramienta de Colaboración en Tiempo Real</div>
+                    <div class="proyecto-descripcion">Plataforma para la edición colaborativa de contenidos que permite a múltiples autores trabajar simultáneamente en el mismo documento.</div>
+                    <div class="proyecto-tecnologias">
+                        <span class="tecnologia-tag">WebSockets</span>
+                        <span class="tecnologia-tag">Express</span>
+                        <span class="tecnologia-tag">Redis</span>
+                        <span class="tecnologia-tag">Vue.js</span>
+                    </div>
+                </div>
+                
+                <div class="proyecto-card">
+                    <div class="proyecto-titulo">Biblioteca JS de Visualización de Datos</div>
+                    <div class="proyecto-descripcion">Biblioteca open-source para crear visualizaciones interactivas de datos complejos, utilizada en la sección de estadísticas de la plataforma.</div>
+                    <div class="proyecto-tecnologias">
+                        <span class="tecnologia-tag">JavaScript</span>
+                        <span class="tecnologia-tag">D3.js</span>
+                        <span class="tecnologia-tag">Canvas</span>
+                        <span class="tecnologia-tag">SVG</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="seccion">
+            <h2>Habilidades Técnicas</h2>
+            <div class="habilidades-container">
+                <div class="habilidad-grupo">
+                    <div class="habilidad-titulo">Lenguajes de Programación</div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>JavaScript/TypeScript</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 95%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Python</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 85%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>PHP</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 75%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Java</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 70%"></div>
+                    </div>
+                </div>
+                
+                <div class="habilidad-grupo">
+                    <div class="habilidad-titulo">Frameworks & Tecnologías</div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>React & React Native</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 90%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Node.js & Express</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 92%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Vue.js</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 85%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>MongoDB & SQL</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <div class="habilidad-grupo">
+                    <div class="habilidad-titulo">DevOps & Herramientas</div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Git & GitHub</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 95%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Docker</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 85%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>CI/CD (Jenkins, GitHub Actions)</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 80%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>AWS & Cloud Services</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 75%"></div>
+                    </div>
+                </div>
+                
+                <div class="habilidad-grupo">
+                    <div class="habilidad-titulo">Habilidades Adicionales</div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>UI/UX Design</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 70%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>SEO & Web Performance</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 85%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Scrum & Metodologías Ágiles</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 90%"></div>
+                    </div>
+                    
+                    <div class="habilidad-nombre">
+                        <span>Testing (Jest, Cypress)</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="habilidad-barra">
+                        <div class="habilidad-progreso" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="seccion">
+            <h2>Contacto</h2>
+            <div class="contacto-grid">
+                <div class="contacto-item">
+                    <div class="contacto-icono">
+                        <img src="/api/placeholder/25/25" alt="Email">
+                    </div>
+                    <div class="contacto-texto">
+                        <strong>Email:</strong><br>
+                        <a href="mailto:  ">  </a>
+                    </div>
+                </div>
+                
+                <div class="contacto-item">
+                    <div class="contacto-icono">
+                        <img src="/api/placeholder/25/25" alt="LinkedIn">
+                    </div>
+                    <div class="contacto-texto">
+                        <strong>LinkedIn:</strong><br>
+                        <a href="#"></a>
+                    </div>
+                </div>
+                
+                <div class="contacto-item">
+                    <div class="contacto-icono">
+                        <img src="/api/placeholder/25/25" alt="GitHub">
+                    </div>
+                    <div class="contacto-texto">
+                        <strong>GitHub:</strong><br>
+                        <a href="#">  </a>
+                    </div>
+                </div>
+                
+                <div class="contacto-item">
+                    <div class="contacto-icono">
+                        <img src="/api/placeholder/25/25" alt="Twitter">
+                    </div>
+                    <div class="contacto-texto">
+                        <strong>Twitter:</strong><br>
+                        <a href="#">  </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="copyright">
+            &copy; 2025 - Los Pioneros Del Conocimiento - Todos los derechos reservados
+        </div>
+    </footer>
+
+    <script>
+        // Función para actualizar la fecha y hora de Bogotá DC
+        function actualizarFechaHora() {
+            const opciones = { 
+                timeZone: 'America/Bogota',
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            };
+            
+            const fechaHora = new Date().toLocaleString('es-CO', opciones);
+            document.getElementById('fechaHora').textContent = fechaHora;
+        }
+
+        // Actualizar la fecha y hora inmediatamente
+        actualizarFechaHora();
+        
+        // Actualizar la fecha y hora cada segundo
+        setInterval(actualizarFechaHora, 1000);

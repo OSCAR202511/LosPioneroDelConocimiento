@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+            /* Eliminado el margin-bottom extra que hacía espacio para el footer fijo */
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        header img {
+            height: 50px;
+            margin-right: 15px;
+            border: 2px solid white;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        .titulo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .titulo-container div.titulo {
+            border: 3px solid #FFD700;
+            padding: 15px;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-shadow: 2px 2px 4px #000;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .titulo-container div.titulo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        .lema {
+            font-size: 16px;
+            text-align: right;
+            margin-top: 5px;
+            font-style: italic;
+            color: #FFD700;
+        }
+        .fecha-hora {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFD700;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        nav {
+            background-color: #555;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+            font-size: 18px;
+        }
+        .contenido-barra {
+            background-color: #777;
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 10px;
+            width: 80%;
+            position: relative;
+        }
+        .contenido-titulo {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #555;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            font-size: 16px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .contenido-barra a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        main h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+        }
+        .introduccion {
+            display: flex;
+            align-items: flex-start;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .introduccion-texto {
+            flex: 1;
+            padding-right: 20px;
+        }
+        .texto-parrafo {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .imagen-derecha {
+            flex: 0 0 300px;
+            margin-left: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 2px solid #FFD700;
+        }
+        .imagen-derecha img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Modificado el footer para que no sea fijo */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 10px;
+            width: 100%;
+            height: auto;
+            /* Eliminadas las propiedades position y bottom que lo hacían fijo */
+        }
+        .autores-seccion {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .autores-titulo {
+            background: linear-gradient(45deg, #FF4500, #FFD700);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+        .autores-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .autor-card {
+            background: linear-gradient(135deg, #2c3e50, #4a5568);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        .autor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-color: #FFD700;
+        }
+        .autor-foto {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px; /* Modificado de 50% a 8px para bordes cuadrados con esquinas redondeadas */
+            margin: 0 auto 15px;
+            border: 3px solid #FFD700;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .autor-foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .autor-nombre {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #FFD700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+        .autor-rol {
+            font-style: italic;
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .autor-bio {
+            font-size: 12px;
+            color: #ddd;
+            text-align: justify;
+            line-height: 1.4;
+        }
+        .copyright {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #999;
+            border-top: 1px solid #666;
+            padding-top: 10px;
+        }
+        .ver-mas-bio {
+            display: inline-block;
+            margin-top: 8px;
+            background-color: #FFD700;
+            color: #333;
+            border-radius: 12px;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        .ver-mas-bio:hover {
+            background-color: #FFC107;
+            transform: scale(1.05);
+        }
+        /* Añadido contenido extra para hacer la página más larga */
+        .contenido-adicional {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .contenido-adicional h2 {
+            color: #333;
+            border-bottom: 1px solid #FFD700;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        /* Nuevo estilo para los enlaces de los autores */
+        .autor-link {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            display: block;
+        }
+        
+        .autor-link:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="fechaHora" class="fecha-hora">Cargando fecha y hora...</div>
+        <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlAZEiFdKbti3BQI5AYfYojcDlg0gTS1aWveFXdqI0lHAuadh5Rau13O19NaIBSVkjgnKEqcTxQVdl_sVcwLkit2hH3NI_-XrE4ipbOz6AYoWIN053nyo7EpCOkU5lTlpAHJFhaCbN7nQNt9olcBagNJPlnOwnF3OZ9ODB3RcORQA4K8SOiUp7AHf_-1wa/s1024/Logo.png">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlAZEiFdKbti3BQI5AYfYojcDlg0gTS1aWveFXdqI0lHAuadh5Rau13O19NaIBSVkjgnKEqcTxQVdl_sVcwLkit2hH3NI_-XrE4ipbOz6AYoWIN053nyo7EpCOkU5lTlpAHJFhaCbN7nQNt9olcBagNJPlnOwnF3OZ9ODB3RcORQA4K8SOiUp7AHf_-1wa/s200/Logo.png" alt="Logo">
+        </a>
+        <div class="titulo-container">
+            <div class="titulo">Los Pioneros Del Conocimiento</div>
+            <div class="lema">"Explorando el conocimiento"</div>
+        </div>
+    </header>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Sobre mí</a>
+        <a href="#">Contacto</a>
+    </nav>
+    <div class="contenido-barra">
+        <div class="contenido-titulo">CONTENIDOS</div>
+        <a href="#">Cont1</a>
+        <a href="#">Cont2</a>
+        <a href="#">Cont3</a>
+        <a href="#">Cont4</a>
+        <a href="#">Cont5</a>
+    </div>
+    <main>
+        <h1>Bienvenidos a Los Pioneros Del Conocimiento</h1>
+        <div class="introduccion">
+            <div class="introduccion-texto">
+                <p class="texto-parrafo">En <strong>Los Pioneros Del Conocimiento</strong>, nos dedicamos a explorar y difundir el saber en todas sus formas. Desde las ciencias exactas hasta las humanidades, nuestro objetivo es crear un espacio donde el aprendizaje sea accesible, dinámico y enriquecedor para todos.</p>
+                
+                <p class="texto-parrafo">Fundada en 2023 por un grupo de entusiastas del conocimiento, nuestra plataforma ha crecido hasta convertirse en un referente para estudiantes, profesionales y curiosos que buscan expandir sus horizontes intelectuales. Creemos firmemente que el conocimiento compartido es poder multiplicado.</p>
+                
+                <p class="texto-parrafo">Nuestro equipo está formado por expertos en diversas disciplinas, unidos por la pasión de enseñar y aprender. A través de artículos, tutoriales, webinars y recursos multimedia, ofrecemos contenido de alta calidad diseñado para inspirar y educar a nuestra creciente comunidad de seguidores.</p>
+                
+                <p class="texto-parrafo">Te invitamos a unirte a nuestra aventura del saber. Explora nuestras secciones, participa en nuestros foros y forma parte de una comunidad que valora el conocimiento como la herramienta más poderosa para transformar vidas y sociedades.</p>
+            </div>
+            <div class="imagen-derecha">
+                <img src="/api/placeholder/300/400" alt="Imagen de introducción">
+            </div>
+        </div>
+        
+        <!-- Contenido adicional para hacer la página más larga -->
+        <div class="contenido-adicional">
+            <h2>Nuestras Áreas de Conocimiento</h2>
+            <p class="texto-parrafo">En Los Pioneros Del Conocimiento abarcamos diversas disciplinas para ofrecer una experiencia educativa integral. Algunas de nuestras principales áreas de enfoque incluyen:</p>
+            
+            <h3>Ciencias y Tecnología</h3>
+            <p class="texto-parrafo">Exploramos los avances más recientes en campos como la inteligencia artificial, biotecnología, astronomía y ciencias de la computación. Ofrecemos explicaciones claras de conceptos complejos y analizamos cómo estas tecnologías están transformando nuestro mundo.</p>
+            
+            <h3>Humanidades y Ciencias Sociales</h3>
+            <p class="texto-parrafo">Profundizamos en la historia, filosofía, psicología y sociología, examinando las grandes preguntas que han ocupado a la humanidad a lo largo del tiempo. Relacionamos estas disciplinas con los desafíos contemporáneos para obtener perspectivas más ricas y matizadas.</p>
+            
+            <h3>Arte y Creatividad</h3>
+            <p class="texto-parrafo">Celebramos la expresión artística en todas sus formas, desde la literatura y las artes visuales hasta la música y el cine. Analizamos movimientos artísticos, exploramos técnicas creativas y destacamos obras que han transformado nuestra comprensión de la belleza y la expresión.</p>
+            
+            <h3>Desarrollo Personal</h3>
+            <p class="texto-parrafo">Compartimos herramientas, estrategias y conocimientos para fomentar el crecimiento individual. Abordamos temas como el aprendizaje efectivo, la productividad, el bienestar emocional y la construcción de hábitos positivos que impulsen el desarrollo integral.</p>
+        </div>
+        
+        <div class="contenido-adicional">
+            <h2>Metodología de Aprendizaje</h2>
+            <p class="texto-parrafo">En Los Pioneros Del Conocimiento, hemos desarrollado un enfoque pedagógico único que combina lo mejor de diversas tradiciones educativas con las posibilidades que ofrece la era digital:</p>
+            
+            <h3>Aprendizaje Experiencial</h3>
+            <p class="texto-parrafo">Creemos que se aprende haciendo. Por eso, nuestros contenidos incluyen actividades prácticas, simulaciones y proyectos que permiten a los usuarios aplicar inmediatamente lo aprendido. Esta metodología favorece la retención y profundización del conocimiento.</p>
+            
+            <h3>Enfoque Interdisciplinario</h3>
+            <p class="texto-parrafo">Los problemas complejos requieren perspectivas diversas. Fomentamos conexiones entre diferentes campos del saber, mostrando cómo los conceptos de una disciplina pueden iluminar cuestiones en otra, creando así una red de conocimiento interconectado.</p>
+            
+            <h3>Comunidad de Aprendizaje</h3>
+            <p class="texto-parrafo">El conocimiento florece en el diálogo. Promovemos espacios de discusión donde los miembros pueden compartir ideas, hacer preguntas y colaborar en proyectos. Esta dimensión social del aprendizaje enriquece la experiencia educativa de todos.</p>
+            
+            <h3>Adaptación al Ritmo Individual</h3>
+            <p class="texto-parrafo">Reconocemos que cada persona tiene su propio tempo y estilo de aprendizaje. Nuestros recursos están diseñados para ser flexibles, permitiendo diferentes rutas y velocidades según las necesidades e intereses de cada usuario.</p>
+        </div>
+    </main>
+    <footer>
+        <div class="autores-seccion">
+            <div class="autores-titulo">Los Creadores</div>
+        </div>
+        <div class="autores-container">
+            <!-- Tarjeta de Oscar con enlaces en nombre y foto -->
+            <div class="autor-card">
+                <a href="autor-oscar.html" class="autor-link">
+                    <div class="autor-foto">
+                        <img src="/api/placeholder/120/120" alt="Foto de Oscar Carrillo">
+                    </div>
+                </a>
+                <a href="autor-oscar.html" class="autor-link">
+                    <div class="autor-nombre">Oscar Carrillo</div>
+                </a>
+                <div class="autor-rol">Desarrollador Principal</div>
+                <div class="autor-bio">
+                    Ingeniero de software con más de 10 años de experiencia en desarrollo web. Especialista en JavaScript y arquitecturas frontend. Graduado de la Universidad Nacional de Colombia y apasionado por las tecnologías open source.
+                    <a href="autor-oscar.html" class="ver-mas-bio">Ver más</a>
+                </div>
+            </div>
+            
+            <!-- Tarjeta de Michael con enlaces en nombre y foto -->
+            <div class="autor-card">
+                <a href="autor-michael.html" class="autor-link">
+                    <div class="autor-foto">
+                        <img src="/api/placeholder/120/120" alt="Foto de Michael Alvarez">
+                    </div>
+                </a>
+                <a href="autor-michael.html" class="autor-link">
+                    <div class="autor-nombre">Michael Alvarez</div>
+                </a>
+                <div class="autor-rol">Diseñador</div>
+                <div class="autor-bio">
+                    Diseñador UX/UI con formación en Bellas Artes y Diseño Digital. Ha trabajado para marcas internacionales creando experiencias digitales intuitivas y atractivas. Defensor del diseño centrado en el usuario y las interfaces minimalistas.
+                    <a href="autor-michael.html" class="ver-mas-bio">Ver más</a>
+                </div>
+            </div>
+            
+            <!-- Tarjeta de Dominik con enlaces en nombre y foto -->
+            <div class="autor-card">
+                <a href="autor-dominik.html" class="autor-link">
+                    <div class="autor-foto">
+                        <img src="/api/placeholder/120/120" alt="Foto de Dominik Rodriguez">
+                    </div>
+                </a>
+                <a href="autor-dominik.html" class="autor-link">
+                    <div class="autor-nombre">Dominik Rodriguez</div>
+                </a>
+                <div class="autor-rol">Editor de Contenido</div>
+                <div class="autor-bio">
+                    Periodista y editor con especialización en comunicación digital. Máster en Gestión de Contenidos por la Universidad de Barcelona. Anteriormente editor en importantes medios de comunicación, ahora lidera la estrategia de contenidos de nuestra plataforma.
+                    <a href="autor-dominik.html" class="ver-mas-bio">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 - Los Pioneros Del Conocimiento - Todos los derechos reservados
+        </div>
+    </footer>
+
+    <script>
+        // Función para actualizar la fecha y hora de Bogotá DC
+        function actualizarFechaHora() {
+            const opciones = { 
+                timeZone: 'America/Bogota',
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true
+            };
+            
+            const fechaHora = new Date().toLocaleString('es-CO', opciones);
+            document.getElementById('fechaHora').textContent = fechaHora;
+        }
+        
+        // Actualizar inicialmente
+        actualizarFechaHora();
+        
+        // Actualizar cada segundo
+        setInterval(actualizarFechaHora, 1000);
+    </script>
+</body>
+</html>
